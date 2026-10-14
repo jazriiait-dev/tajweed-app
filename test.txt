@@ -1,0 +1,36 @@
+Resolving dependencies...
+Downloading packages...
+  code_assets 1.2.1 (2.1.0 available)
+  hooks 2.0.2 (2.2.0 available)
+  material_color_utilities 0.13.0 (0.13.1 available)
+  meta 1.18.3 (1.19.0 available)
+  objective_c 9.5.0 (9.6.2 available)
+  record_use 0.6.0 (1.1.1 available)
+  test_api 0.7.12 (0.7.15 available)
+  vector_math 2.4.0 (2.4.3 available)
+Got dependencies!
+8 packages have newer versions incompatible with dependency constraints.
+Try `flutter pub outdated` for more information.
+00:00 +0: loading /home/runner/work/tajweed-app/tajweed-app/app/test/session_test.dart
+00:00 +0: /home/runner/work/tajweed-app/tajweed-app/app/test/session_test.dart: signing in keeps the refresh token in protected storage and switches to the account language
+00:00 +1: /home/runner/work/tajweed-app/tajweed-app/app/test/session_test.dart: a language picked on this device is kept at sign-in and saved on the account
+00:00 +2: /home/runner/work/tajweed-app/tajweed-app/app/test/session_test.dart: a saved sign-in is restored at the next launch
+00:00 +3: /home/runner/work/tajweed-app/tajweed-app/app/test/session_test.dart: an expired access token is renewed once, even for calls made at the same time
+00:00 +4: /home/runner/work/tajweed-app/tajweed-app/app/test/session_test.dart: a refresh token the server refuses signs the person out
+00:00 +5: /home/runner/work/tajweed-app/tajweed-app/app/test/session_test.dart: a child session is reopened through the parent when it expires
+00:00 +6: /home/runner/work/tajweed-app/tajweed-app/app/test/session_test.dart: signing out ends the session on the server too
+00:00 +7: /home/runner/work/tajweed-app/tajweed-app/app/test/session_test.dart: the chosen language is remembered
+00:00 +8: /home/runner/work/tajweed-app/tajweed-app/app/test/session_test.dart: no network is reported as such, and keeps a saved sign-in for the next launch
+00:00 +9: /home/runner/work/tajweed-app/tajweed-app/app/test/screens_test.dart: Translations every key exists in Arabic, English and French
+00:00 +10: /home/runner/work/tajweed-app/tajweed-app/app/test/screens_test.dart: Translations placeholders are filled in
+00:00 +11: /home/runner/work/tajweed-app/tajweed-app/app/test/screens_test.dart: Translations ayah numbers use Arabic-Indic digits
+00:00 +12: /home/runner/work/tajweed-app/tajweed-app/app/test/screens_test.dart: the welcome screen follows the chosen language, right to left in Arabic
+00:01 +13: /home/runner/work/tajweed-app/tajweed-app/app/test/screens_test.dart: signing in with a wrong password shows a message; the right one opens the home screen
+00:01 +14: /home/runner/work/tajweed-app/tajweed-app/app/test/screens_test.dart: the sign-in form checks the email before calling the server
+00:01 +15: /home/runner/work/tajweed-app/tajweed-app/app/test/screens_test.dart: creating an account needs the adult confirmation
+00:02 +16: /home/runner/work/tajweed-app/tajweed-app/app/test/screens_test.dart: a parent adds a child with consent, opens the profile, and comes back
+00:02 +17: /home/runner/work/tajweed-app/tajweed-app/app/test/screens_test.dart: the Quran can be read without an account
+00:02 +18: /home/runner/work/tajweed-app/tajweed-app/app/test/screens_test.dart: a text waiting for review is hidden from students and shown to admins with a banner
+00:02 +19: /home/runner/work/tajweed-app/tajweed-app/app/test/screens_test.dart: an admin previews and approves the text
+00:03 +20: /home/runner/work/tajweed-app/tajweed-app/app/test/screens_test.dart: signing out returns to the welcome screen
+00:03 +21: All tests passed!
