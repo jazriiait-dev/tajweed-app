@@ -1,0 +1,5 @@
+analyzer:
+  errors:
+    # Unused code is a warning, which fails the build: keep the code clean.
+    unused_import: warning
+    unused_local_variable: warning

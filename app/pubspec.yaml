@@ -1,0 +1,41 @@
+name: tajweed_app
+description: Quran memorization and tajweed app for iOS, Android and the web.
+publish_to: none
+version: 0.1.0+1
+
+environment:
+  sdk: ">=3.5.0 <4.0.0"
+
+# Versions are resolved by the build and pinned in pubspec.lock.
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  http: any
+  flutter_secure_storage: any
+  shared_preferences: any
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/fonts/OFL-AmiriQuran.txt
+    - assets/fonts/OFL-NotoNaskhArabic.txt
+    - assets/fonts/OFL-NotoSans.txt
+  fonts:
+    # Quran text
+    - family: AmiriQuran
+      fonts:
+        - asset: assets/fonts/AmiriQuran-Regular.ttf
+    # Interface, Arabic
+    - family: NotoNaskhArabic
+      fonts:
+        - asset: assets/fonts/NotoNaskhArabic.ttf
+    # Interface, English and French
+    - family: NotoSans
+      fonts:
+        - asset: assets/fonts/NotoSans.ttf
