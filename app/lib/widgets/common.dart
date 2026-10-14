@@ -24,7 +24,11 @@ class _LoaderState<T> extends State<Loader<T>> {
     _future = widget.load();
   }
 
-  void _reload() => setState(() => _future = widget.load());
+  void _reload() {
+    setState(() {
+      _future = widget.load();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
