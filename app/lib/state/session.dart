@@ -38,6 +38,10 @@ class Session extends ChangeNotifier {
   final KeyValueStore prefs;
 
   String language;
+
+  /// True once a language has been picked on this device. Signing in then
+  /// keeps it, instead of switching to the language saved on the account.
+  bool languageChosen = false;
   bool restoring = true;
 
   User? user;
@@ -59,7 +63,10 @@ class Session extends ChangeNotifier {
 
   Future<void> restore() async {
     final saved = await prefs.read(_languageKey);
-    if (saved != null && languages.contains(saved)) language = saved;
+    if (saved != null && languages.contains(saved)) {
+      language = saved;
+      languageChosen = true;
+    }
 
     _refresh = await secrets.read(_refreshKey);
     if (_refresh != null) {
@@ -79,7 +86,12 @@ class Session extends ChangeNotifier {
   // --- language --------------------------------------------------------------------
 
   Future<void> setLanguage(String code) async {
-    if (!languages.contains(code) || code == language) return;
+    if (!languages.contains(code)) return;
+    languageChosen = true;
+    if (code == language) {
+      await prefs.write(_languageKey, code);
+      return;
+    }
     language = code;
     notifyListeners();
     await prefs.write(_languageKey, code);
@@ -119,9 +131,19 @@ class Session extends ChangeNotifier {
     await _keepTokens(result);
     user = User.fromJson((result['user'] as Map).cast<String, dynamic>());
     activeChild = null;
-    if (languages.contains(user!.language) && user!.language != language) {
-      language = user!.language;
-      await prefs.write(_languageKey, language);
+    final accountLanguage = user!.language;
+    if (accountLanguage != language) {
+      if (languageChosen || !languages.contains(accountLanguage)) {
+        // Keep the language picked on this device, and save it on the account.
+        try {
+          user = User.fromJson(await adult((token) => api.updateMe(token, {'language': language})));
+        } on ApiException {
+          // The account keeps its old language; this device keeps the chosen one.
+        }
+      } else {
+        language = accountLanguage;
+        await prefs.write(_languageKey, language);
+      }
     }
     notifyListeners();
   }

@@ -46,14 +46,13 @@ class TajweedApp extends StatelessWidget {
 }
 
 ThemeData buildTheme(String language, Brightness brightness) {
-  final arabic = language == 'ar';
   return ThemeData(
     useMaterial3: true,
     colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF1F6F5C), brightness: brightness),
-    // Arabic interface text uses Noto Naskh Arabic; Latin text uses Noto Sans.
-    // Each falls back to the other, so mixed text (a French screen with an
-    // Arabic surah name) always has the right letters.
-    fontFamily: arabic ? 'NotoNaskhArabic' : 'NotoSans',
-    fontFamilyFallback: arabic ? const ['NotoSans'] : const ['NotoNaskhArabic'],
+    // Latin letters and digits use Noto Sans; Noto Sans has no Arabic letters,
+    // so Arabic interface text falls back to Noto Naskh Arabic. Mixed text,
+    // such as an email address on an Arabic screen, gets the right font for each.
+    fontFamily: 'NotoSans',
+    fontFamilyFallback: const ['NotoNaskhArabic'],
   );
 }

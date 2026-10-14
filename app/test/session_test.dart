@@ -26,6 +26,16 @@ void main() {
     expect(secrets.values['refresh_token'], isNotNull);
   });
 
+  test('a language picked on this device is kept at sign-in and saved on the account', () async {
+    final session = testSession(backend);
+    await session.restore();
+    await session.setLanguage('ar');
+    await session.signIn('amina@example.com', 'correct horse');
+    expect(session.language, 'ar');
+    expect(session.user!.language, 'ar');
+    expect(backend.users.values.firstWhere((u) => u['email'] == 'amina@example.com')['language'], 'ar');
+  });
+
   test('a saved sign-in is restored at the next launch', () async {
     final secrets = MemoryStore();
     final first = testSession(backend, secrets: secrets);
