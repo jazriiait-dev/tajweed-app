@@ -1,0 +1,7 @@
+# Versions marked "tested" are the ones the test suite was run against.
+starlette==1.6.0          # tested
+uvicorn==0.53.0           # tested
+pydantic==2.13.5          # tested
+PyJWT==2.14.0             # tested
+psycopg[binary,pool]>=3.2.3,<4
+tzdata

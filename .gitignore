@@ -1,0 +1,7 @@
+.env
+__pycache__/
+*.pyc
+# The Quran source file is downloaded from its publisher, not kept in this repository.
+quran-text/*
+!quran-text/README.md
+backups/

@@ -1,0 +1,2 @@
+# Only needed to run the tests (Starlette's test client uses it).
+httpx

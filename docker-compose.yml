@@ -1,0 +1,53 @@
+# The whole service on one server: database, API, and HTTPS in front.
+# Settings come from the .env file next to this one (copy .env.example).
+
+services:
+  db:
+    image: postgres:16
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: tajweed
+      POSTGRES_USER: tajweed
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in the .env file}
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U tajweed -d tajweed"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  api:
+    build: ./backend
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      APP_ENV: production
+      DATABASE_URL: postgresql://tajweed:${POSTGRES_PASSWORD}@db:5432/tajweed
+      JWT_SECRET: ${JWT_SECRET:?Set JWT_SECRET in the .env file}
+      CORS_ORIGINS: ${CORS_ORIGINS:-}
+    volumes:
+      # Put the Quran source file in ./quran-text to import it (read-only inside).
+      - ./quran-text:/srv/quran-text:ro
+
+  caddy:
+    image: caddy:2
+    restart: unless-stopped
+    depends_on:
+      - api
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      DOMAIN: ${DOMAIN:?Set DOMAIN in the .env file}
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy-data:/data
+      - caddy-config:/config
+
+volumes:
+  db-data:
+  caddy-data:
+  caddy-config:
