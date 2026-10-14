@@ -75,9 +75,10 @@ class SurahListScreen extends StatelessWidget {
                   key: Key('surah_${surah.number}'),
                   leading: CircleAvatar(child: Text('${surah.number}')),
                   title: Text(surah.nameAr, textDirection: TextDirection.rtl, style: const TextStyle(fontSize: 20)),
-                  subtitle: Text(
-                    '${surah.nameLatin} · ${s.t('ayah_count', {'n': '${surah.ayahCount}'})}',
-                  ),
+                  // The Latin name helps English and French readers; in Arabic it is left out.
+                  subtitle: Text(s.language == 'ar'
+                      ? s.t('ayah_count', {'n': '${surah.ayahCount}'})
+                      : '${surah.nameLatin} · ${s.t('ayah_count', {'n': '${surah.ayahCount}'})}'),
                   onTap: () => Navigator.of(context).push(
                     MaterialPageRoute(builder: (_) => SurahScreen(riwaya: riwaya, summary: surah)),
                   ),

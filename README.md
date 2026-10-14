@@ -1,8 +1,7 @@
 # Quran memorization and tajweed app
 
-This repository holds the server side of the app: the database, sign-in,
-the roles (student, parent, teacher, admin) and the Quran reader data.
-The mobile and web app is not here yet.
+This repository holds the server (`backend/`) and the mobile and web app
+(`app/`, built with Flutter).
 
 The product is described in the version 1 specification. This repository
 covers phase 1 of its roadmap, "Foundations".
@@ -16,7 +15,7 @@ covers phase 1 of its roadmap, "Foundations".
 | Quran text importer and integrity check | `backend/app/quran_import.py` | Run and tested with placeholder text |
 | Server setup (Docker, HTTPS, backups) | `docker-compose.yml`, `Caddyfile`, `scripts/` | Written, **not yet run** |
 | Automated tests on GitHub | `.github/workflows/tests.yml` | Written, **not yet run** |
-| Mobile and web app | not started | |
+| Mobile and web app (sign-in, child profiles, Quran reader, admin text review, Arabic, English and French) | `app/` | Built and tested on GitHub for the web and Android, 21 automated tests; tried end to end in a browser |
 
 Two things could not be checked where this code was written, because that
 machine could not download software:
@@ -88,7 +87,7 @@ FastAPI later is a small job, because the route handlers hold no logic.
 
 ## Not built yet
 
-- The mobile and web app
+- iOS build (needs an Apple developer account and a Mac build machine)
 - Password reset by email (for now an admin sets a new password)
 - Email address confirmation at sign-up
 - Juz, hizb and page navigation in the reader
